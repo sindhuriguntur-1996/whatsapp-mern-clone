@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+/*import mongoose from 'mongoose';
 
 //data schema--how our data is styled
 
@@ -11,3 +11,5 @@ const whatsappSchema=mongoose.Schema({
 
 //setting up collection
 export default mongoose.model('messagecontent',whatsappSchema)
+
+*/
