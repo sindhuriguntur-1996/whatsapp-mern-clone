@@ -1,9 +1,9 @@
 //importing
 import express from "express";
-//import mongoose from "mongoose";
-//import Messages from "./dbMessages.js";
+import mongoose from "mongoose";
+import Messages from "./dbMessages.js";
 import Pusher from "pusher";
-import mySql from "mysql";
+//import mySql from "mysql";
 import bodyParser from "body-parser";
 
 
@@ -32,7 +32,7 @@ app.use((req,res,next)=>{
 })
 
 //DB config
-/*const connection_url="mongodb+srv://admin:2DN5tcpCw5EOCJtZ@cluster0.fs8iy.mongodb.net/whatsappdb?retryWrites=true&w=majority";
+const connection_url="mongodb+srv://admin:2DN5tcpCw5EOCJtZ@cluster0.fs8iy.mongodb.net/whatsappdb?retryWrites=true&w=majority";
 mongoose.connect(connection_url,{
     useCreateIndex:true,
     useNewUrlParser:true,
@@ -62,25 +62,25 @@ db.once('open',()=>{
             console.log('error')
         };
     });
-});*/
+});
 
-const con = mySql.createConnection({
+/*const con = mySql.createConnection({
     host: "localhost",
     user: "root",
     password: "root",
     insecureAuth : true,
     database: "mydb",
     table:"whatsapp"
-  });
+  });*/
 
   //var sql = "CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))";
 
   
-    /*con.query("CREATE DATABASE mydb", function (err, result) {
+    con.query("CREATE DATABASE mydb", function (err, result) {
         if (err) throw err;
         console.log("Database created");
 
-      });*/
+      });
      /* var sql = "CREATE TABLE whatsapp (name VARCHAR(255), message VARCHAR(255))";
   con.query(sql, function (err, result) {
     if (err) throw err;
@@ -91,20 +91,20 @@ const con = mySql.createConnection({
 //api routes
 app.get('/',(req,res)=>res.status(200).send('hello world'));
 
-//app.post('/messages/new',(req,res)=>{
-  //  const dbMessage=req.body
+app.post('/messages/new',(req,res)=>{
+   const dbMessage=req.body
 
-  /* Messages.create(dbMessage,(err,data)=>{
+  Messages.create(dbMessage,(err,data)=>{
         if(err){
             res.status(500).send(err)
         }else{
             res.status(200).send(data)
         }
     })
-})*/
+})
 
 
-app.post('/messages/newmessage',(req,res)=>{
+/*app.post('/messages/newmessage',(req,res)=>{
     let name=req.body.name;
     let message=req.body.message;
     con.connect(function(err) {
@@ -123,17 +123,17 @@ app.post('/messages/newmessage',(req,res)=>{
         }
       });
     });
-})
+})*/
 
-//app.get('/messages/sync',(req,res)=>{
- /*  Messages.find((err,data)=>{
+app.get('/messages/sync',(req,res)=>{
+   Messages.find((err,data)=>{
         if(err){
             res.status(500).send(err)
         }else{
             res.status(201).send(data)
         }
-    })*/
-    app.get('/messages/synch',(req,res)=>{
+    })
+ /*   app.get('/messages/synch',(req,res)=>{
       //  con.connect(function(err) {
         //    if (err) throw err;
             con.query("SELECT * FROM whatsapp", function (err, result, fields) {
@@ -147,7 +147,7 @@ app.post('/messages/newmessage',(req,res)=>{
                 }
         //  });
 })});
-
+*/
 
 //listener
 app.listen(port,()=>console.log(`listening on ${port}`));
